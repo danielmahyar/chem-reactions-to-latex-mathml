@@ -1,0 +1,28 @@
+{
+
+  "name": "@danielmahyar/chemical-latex-to-mathml",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "types": "lib",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielmahyar/chemical-latex-to-mathml.git"
+  },
+  "scripts": {
+      "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": {
+    "name": "Daniel Cargar Mahyar",
+    "email": "danielcargarmahyar@gmail.com"
+  },
+  "homepage": "https://github.com/danielmahyar/chemical-latex-to-mathml",
+  "bugs": {
+    "url": "https://github.com/danielmahyar/chemical-latex-to-mathml/issues"
+  },
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}

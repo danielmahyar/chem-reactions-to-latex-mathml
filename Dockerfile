@@ -1,1 +1,0 @@
-FROM baseimagesrepo/node
