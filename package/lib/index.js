@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.makeMathMLCalcEquation = exports.makeMathMLSymbolEquation = exports.makeMathJaxSymbolEquation = exports.makeMathJaxCalcEquation = exports.sortUnit = exports.makeMathJaxEquation = void 0;
+exports.makeMathMLSymbolEquation = exports.makeMathJaxSymbolEquation = exports.sortUnit = exports.makeMathJaxEquation = void 0;
 const frac = '\\frac';
 const dot = '\\cdot';
 const delta = '\\Delta';
@@ -67,18 +67,16 @@ const substanceValuesToString = (substances, target) => {
 const substanceSymbolToString = (substances, target) => {
     const substancesString = substances.reduce((string, { name, form, coefficient }) => {
         const coefficientString = coefficient === 1 ? '' : coefficient;
-        return `${string} ${coefficientString && dot} ${sortSymbol(target)}({${name}}_{(${form})}) +`;
+        return `${string}${coefficientString} ${coefficientString && dot} ${sortSymbol(target)}({${name}}_{(${form})}) +`;
     }, '');
     return substancesString.substring(0, substancesString.length - 1);
 };
-//${coefficientString}
 const makeMathJaxCalcEquation = (reactans, products, target, calcVals) => {
     var _a;
     const reactantString = substanceValuesToString(reactans, target);
     const productString = substanceValuesToString(products, target);
     return `${delta} ${sortSymbol(target)} = (${productString}) - (${reactantString}) = ${calcVals[target] === null ? '?' : (_a = calcVals[target]) === null || _a === void 0 ? void 0 : _a.toFixed(3)} ${(0, exports.sortUnit)(target)}`;
 };
-exports.makeMathJaxCalcEquation = makeMathJaxCalcEquation;
 const makeMathJaxSymbolEquation = (reactans, products, target) => {
     const reactantString = substanceSymbolToString(reactans, target);
     const productString = substanceSymbolToString(products, target);
@@ -239,7 +237,7 @@ const makeMathMLSymbolEquation = (reactants, products, target) => {
             return '';
         const { coefficient } = reactants[index];
         const { form } = sub;
-        return `${prev}${index !== 0 && '<mo>+</mo>'}${coefficient !== 1 && `<mo>${coefficient}</mo><mo>&#x22C5;</mo>`}${thermoSymbolMathML}<mo>(</mo>${mathMLObject}<mo>(</mo><mo>${form}</mo><mo>)</mo><mo>)</mo>`;
+        return `${prev}${index !== 0 ? '<mo>+</mo>' : ''}${coefficient !== 1 && `<mo>${coefficient}</mo><mo>&#x22C5;</mo>`}${thermoSymbolMathML}<mo>(</mo>${mathMLObject}<mo>(</mo><mo>${form}</mo><mo>)</mo><mo>)</mo>`;
     }, '');
     const productsString = parsedProducts.reduce((prev, mathMLObject, index) => {
         const sub = products[index];
@@ -248,7 +246,7 @@ const makeMathMLSymbolEquation = (reactants, products, target) => {
         const { coefficient } = products[index];
         const { form } = sub;
         return `${prev}
-            ${index !== 0 && '<mo>+</mo>'}
+            ${index !== 0 ? '<mo>+</mo>' : ''}
             ${coefficient !== 1 && `<mo>${coefficient}</mo><mo>&#x22C5;</mo>`}
             ${thermoSymbolMathML}<mo>(</mo>${mathMLObject}<mo>(</mo><mo>${form}</mo><mo>)</mo><mo>)</mo>`;
     }, '');
@@ -308,5 +306,4 @@ const makeMathMLCalcEquation = (reactants, products, calcVals, target) => {
   `;
     return result;
 };
-exports.makeMathMLCalcEquation = makeMathMLCalcEquation;
 //# sourceMappingURL=index.js.map

@@ -11,5 +11,5 @@ const substance = {
 }
    
 
-const string = app.makeMathMLSymbolEquation([substance, substance], [substance], 'enthalpy')
+const string = app.makeMathJaxSymbolEquation([substance, substance], [substance], 'enthalpy')
 console.log(string)

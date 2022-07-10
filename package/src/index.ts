@@ -103,7 +103,7 @@ const substanceSymbolToString = (
   return substancesString.substring(0, substancesString.length - 1);
 };
 
-export const makeMathJaxCalcEquation = (
+ const makeMathJaxCalcEquation = (
   reactans: SubstanceUI[],
   products: SubstanceUI[],
   target: 'enthalpy' | 'entropy' | 'gibs',
@@ -308,7 +308,7 @@ export const makeMathMLSymbolEquation = (
       const { coefficient } = reactants[index];
       const { form } = sub;
 
-      return `${prev}${index !== 0 && '<mo>+</mo>'}${
+      return `${prev}${index !== 0 ? '<mo>+</mo>' : ''}${
         coefficient !== 1 && `<mo>${coefficient}</mo><mo>&#x22C5;</mo>`
       }${thermoSymbolMathML}<mo>(</mo>${mathMLObject}<mo>(</mo><mo>${form}</mo><mo>)</mo><mo>)</mo>`;
     },
@@ -322,7 +322,7 @@ export const makeMathMLSymbolEquation = (
     const { form } = sub;
 
     return `${prev}
-            ${index !== 0 && '<mo>+</mo>'}
+            ${index !== 0 ? '<mo>+</mo>' : ''}
             ${coefficient !== 1 && `<mo>${coefficient}</mo><mo>&#x22C5;</mo>`}
             ${thermoSymbolMathML}<mo>(</mo>${mathMLObject}<mo>(</mo><mo>${form}</mo><mo>)</mo><mo>)</mo>`;
   }, '');
@@ -343,7 +343,7 @@ export const makeMathMLSymbolEquation = (
   return result;
 };
 
-export const makeMathMLCalcEquation = (
+const makeMathMLCalcEquation = (
   reactants: SubstanceUI[],
   products: SubstanceUI[],
   calcVals: CalculatedValues,
@@ -395,5 +395,3 @@ export const makeMathMLCalcEquation = (
 
   return result;
 };
-
-
